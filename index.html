@@ -44,36 +44,6 @@
         molestias quisquam non, in natus laboriosam inventore aut saepe corrupti
         facilis cupiditate voluptas voluptatem repellat omnis necessitatibus cum
         modi totam quasi.
-        <br />
-        <br />
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, molestiae
-        aperiam corrupti commodi vel inventore incidunt necessitatibus officia
-        eos quam magnam eveniet exercitationem recusandae. Debitis accusamus
-        voluptatum esse consequuntur quasi.
-        <br />
-        <br />
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, molestiae
-        aperiam corrupti commodi vel inventore incidunt necessitatibus officia
-        eos quam magnam eveniet exercitationem recusandae. Debitis accusamus
-        voluptatum esse consequuntur quasi.
-        <br />
-        <br />
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, molestiae
-        aperiam corrupti commodi vel inventore incidunt necessitatibus officia
-        eos quam magnam eveniet exercitationem recusandae. Debitis accusamus
-        voluptatum esse consequuntur quasi.
-        <br />
-        <br />
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, molestiae
-        aperiam corrupti commodi vel inventore incidunt necessitatibus officia
-        eos quam magnam eveniet exercitationem recusandae. Debitis accusamus
-        voluptatum esse consequuntur quasi.
-        <br />
-        <br />
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, molestiae
-        aperiam corrupti commodi vel inventore incidunt necessitatibus officia
-        eos quam magnam eveniet exercitationem recusandae. Debitis accusamus
-        voluptatum esse consequuntur quasi.
       </p>
 
       <!-- Result display -->
@@ -98,24 +68,35 @@
       searchButton.addEventListener("click", performSearch);
 
       function performSearch() {
-        const searchTerm = searchInput.value.toLowerCase();
-        const textContent = textToSearch.textContent.toLowerCase();
+        const searchTerm = searchInput.value;
+        const textContent = textToSearch.innerHTML;
 
         // Remove previous highlighting
-        textToSearch.innerHTML = textContent;
+        removeHighlights();
 
-        // Check if the search term exists in the text
-        if (textContent.includes(searchTerm)) {
-          const regex = new RegExp(searchTerm, "gi"); // 'gi' for global and case-insensitive matching
-          const highlightedText = textContent.replace(
-            regex,
-            (match) => `<span class="highlight">${match}</span>`
-          );
-          textToSearch.innerHTML = highlightedText;
+        // Check if the search term exists in the text (case-insensitive)
+        const regex = new RegExp(searchTerm, "gi"); // 'gi' for global and case-insensitive matching
+        const matches = textContent.match(regex);
+
+        if (matches && matches.length > 0) {
+          matches.forEach((match) => {
+            textToSearch.innerHTML = textToSearch.innerHTML.replace(
+              match,
+              `<span class="highlight">${match}</span>`
+            );
+          });
           searchResult.textContent = `Search Result: ${searchTerm}`;
         } else {
           searchResult.textContent = "Search Result: Not found";
         }
+      }
+
+      // Function to remove previous highlights
+      function removeHighlights() {
+        const highlights = textToSearch.querySelectorAll(".highlight");
+        highlights.forEach((highlight) => {
+          highlight.outerHTML = highlight.innerHTML;
+        });
       }
     </script>
   </body>
