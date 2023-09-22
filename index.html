@@ -19,7 +19,7 @@
   </head>
   <body>
     <div class="container">
-      <h1>Search and Highlight Example</h1>
+      <h1>Searching</h1>
 
       <!-- Search input -->
       <div class="input-group mb-3">
@@ -112,9 +112,9 @@
             (match) => `<span class="highlight">${match}</span>`
           );
           textToSearch.innerHTML = highlightedText;
-          searchResult.textContent = `Found: ${searchTerm}`;
+          searchResult.textContent = `Search Result: ${searchTerm}`;
         } else {
-          searchResult.textContent = "Not found";
+          searchResult.textContent = "Search Result: Not found";
         }
       }
     </script>
