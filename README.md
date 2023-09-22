@@ -1,4 +1,4 @@
-# Search and Highlight Example
+# Searching Example
 
 This is a simple web page example that allows you to search for a specific word or phrase within a paragraph of text and highlights the matching results. The search is case-insensitive, meaning it will find matches regardless of the letter casing.
 
