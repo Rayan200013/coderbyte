@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search and Highlight Example</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <style>
+      .highlight {
+        background-color: yellow;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Search and Highlight Example</h1>
+
+      <!-- Search input -->
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          id="search-input"
+          class="form-control"
+          placeholder="Search..."
+        />
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          id="search-button"
+        >
+          Search
+        </button>
+      </div>
+
+      <!-- Paragraph of text to search within -->
+      <p id="text-to-search">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi,
+        molestias quisquam non, in natus laboriosam inventore aut saepe corrupti
+        facilis cupiditate voluptas voluptatem repellat omnis necessitatibus cum
+        modi totam quasi.
+        <br />
+        <br />
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, molestiae
+        aperiam corrupti commodi vel inventore incidunt necessitatibus officia
+        eos quam magnam eveniet exercitationem recusandae. Debitis accusamus
+        voluptatum esse consequuntur quasi.
+        <br />
+        <br />
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, molestiae
+        aperiam corrupti commodi vel inventore incidunt necessitatibus officia
+        eos quam magnam eveniet exercitationem recusandae. Debitis accusamus
+        voluptatum esse consequuntur quasi.
+        <br />
+        <br />
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, molestiae
+        aperiam corrupti commodi vel inventore incidunt necessitatibus officia
+        eos quam magnam eveniet exercitationem recusandae. Debitis accusamus
+        voluptatum esse consequuntur quasi.
+        <br />
+        <br />
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, molestiae
+        aperiam corrupti commodi vel inventore incidunt necessitatibus officia
+        eos quam magnam eveniet exercitationem recusandae. Debitis accusamus
+        voluptatum esse consequuntur quasi.
+        <br />
+        <br />
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, molestiae
+        aperiam corrupti commodi vel inventore incidunt necessitatibus officia
+        eos quam magnam eveniet exercitationem recusandae. Debitis accusamus
+        voluptatum esse consequuntur quasi.
+      </p>
+
+      <!-- Result display -->
+      <p id="search-result"></p>
+    </div>
+
+    <!-- Include Bootstrap JS (if needed) -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      // Get references to the search input, button, and the paragraph to search within
+      const searchInput = document.getElementById("search-input");
+      const searchButton = document.getElementById("search-button");
+      const textToSearch = document.getElementById("text-to-search");
+      const searchResult = document.getElementById("search-result");
+
+      // Add an event listener to the search button for the "click" event
+      searchButton.addEventListener("click", performSearch);
+
+      function performSearch() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const textContent = textToSearch.textContent.toLowerCase();
+
+        // Remove previous highlighting
+        textToSearch.innerHTML = textContent;
+
+        // Check if the search term exists in the text
+        if (textContent.includes(searchTerm)) {
+          const regex = new RegExp(searchTerm, "gi"); // 'gi' for global and case-insensitive matching
+          const highlightedText = textContent.replace(
+            regex,
+            (match) => `<span class="highlight">${match}</span>`
+          );
+          textToSearch.innerHTML = highlightedText;
+          searchResult.textContent = `Found: ${searchTerm}`;
+        } else {
+          searchResult.textContent = "Not found";
+        }
+      }
+    </script>
+  </body>
+</html>
